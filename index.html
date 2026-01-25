@@ -3,38 +3,161 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BIZSZIB - Agencia Digital</title>
+    <title>BIZSZIB | El Futuro de tu Identidad</title>
     <style>
+        /* --- ESTILOS MODERNOS --- */
+        :root {
+            --primary: #64ffda; /* Verde Neón */
+            --bg-dark: #0a192f; /* Azul Navy Profundo */
+            --text-light: #ccd6f6;
+            --glass: rgba(255, 255, 255, 0.05);
+        }
+
         body {
-            background-color: #0a192f; /* Azul Oscuro Profundo */
-            color: #ffffff;
-            font-family: sans-serif;
             margin: 0;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background-color: var(--bg-dark);
+            /* Degradado sutil de fondo */
+            background-image: radial-gradient(circle at 50% 50%, #112240 0%, #0a192f 100%);
+            color: var(--text-light);
             height: 100vh;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        /* Contenedor Principal */
+        .container {
             text-align: center;
+            padding: 20px;
+            max-width: 800px;
+            z-index: 10;
         }
+
+        /* Tipografía */
         h1 {
-            font-size: 4rem;
-            letter-spacing: 8px;
-            font-weight: bold;
+            font-size: 5rem;
             margin: 0;
+            background: linear-gradient(to right, #ffffff, #8892b0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 800;
+            letter-spacing: -2px;
         }
+
+        .subtitle {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-top: 10px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-weight: 600;
+        }
+
         p {
-            font-size: 1.2rem;
-            color: #8892b0;
-            letter-spacing: 2px;
+            font-size: 1.1rem;
+            line-height: 1.6;
             margin-top: 20px;
+            color: #8892b0;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Tarjeta Flotante (Animación CSS) */
+        .floating-card {
+            width: 280px;
+            height: 170px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0));
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            margin: 40px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: float 6s ease-in-out infinite;
+            position: relative;
+        }
+
+        /* Chip de la tarjeta */
+        .chip {
+            width: 40px;
+            height: 30px;
+            background: linear-gradient(135deg, #ffd700, #ffcc00);
+            border-radius: 5px;
+            position: absolute;
+            left: 30px;
+            top: 50px;
+            opacity: 0.8;
+        }
+
+        .card-text {
+            position: absolute;
+            bottom: 20px;
+            left: 30px;
+            font-family: monospace;
+            color: rgba(255,255,255,0.6);
+            font-size: 14px;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(2deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
+        }
+
+        /* Botón CTA */
+        .btn {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 15px 40px;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            background: transparent;
+        }
+
+        .btn:hover {
+            background: rgba(100, 255, 218, 0.1);
+            box-shadow: 0 0 20px rgba(100, 255, 218, 0.3);
+            transform: translateY(-3px);
+        }
+
+        /* Móvil */
+        @media (max-width: 600px) {
+            h1 { font-size: 3.5rem; }
+            .subtitle { font-size: 1rem; }
+            .floating-card { width: 240px; height: 150px; }
         }
     </style>
 </head>
 <body>
 
-    <div>
+    <div class="container">
         <h1>BIZSZIB</h1>
-        <p>DIGITAL AGENCY</p>
+        <div class="subtitle">Digital Identity Systems</div>
+        
+        <div class="floating-card">
+            <div class="chip"></div>
+            <div class="card-text">BIZSZIB /// MEMBER</div>
+            <div style="font-size: 2rem; opacity: 0.8;">⚡</div>
+        </div>
+
+        <p>
+            Transformamos profesionales en marcas digitales. 
+            Tarjetas de visita inteligentes, interactivas y sin límites.
+        </p>
+
+        <a href="mailto:hola@bizszib.com" class="btn">CONTACTAR AGENCIA</a>
     </div>
 
 </body>
