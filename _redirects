@@ -1,6 +1,7 @@
-# Redirección de Luis (Todo en minúsculas para asegurar)
+# --- 1. REGLA PARA LUIS (La que ya funciona) ---
 https://luis.bizszib.com/* /clients/luis/:splat 200!
 
-# Redirección Principal
+# --- 2. REGLA PARA LA PORTADA (La que falta) ---
 https://bizszib.com/* /index.html 200
 /* /index.html 200
+
