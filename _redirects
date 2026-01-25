@@ -1,6 +1,6 @@
-# --- REGLA DE LUIS (Con forzado !) ---
-https://luis.bizszib.com/* /clients/LUIS/:splat  200!
+# Redirección de Luis (Todo en minúsculas para asegurar)
+https://luis.bizszib.com/* /clients/luis/:splat 200!
 
-# --- REGLA PRINCIPAL ---
-https://bizszib.com/* /index.html  200
-/* /index.html  200
+# Redirección Principal
+https://bizszib.com/* /index.html 200
+/* /index.html 200
