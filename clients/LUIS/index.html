@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Tarjeta Digital - Luis Cánovas Castillo</title>
+    <meta name="description" content="Director Institucional Territorial Sabadell Professional">
+    
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* =========================================
+           ESTILOS "BANCA CORPORATIVA" - BIZSIB
+           ========================================= */
+        :root {
+            --primary-color: #006dff; /* Azul corporativo intenso */
+            --secondary-color: #6ea8fe; /* Azul más claro para detalles */
+            --bg-gradient: linear-gradient(135deg, #0a192f 0%, #172a45 100%); /* Fondo azul marino serio */
+            --text-main: #ffffff;
+            --text-muted: #b0bdcc;
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --glass-blur: 20px;
+        }
+
+        /* RESET & BASICS */
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg-gradient); color: var(--text-main); min-height: 100vh; display: flex; justify-content: center; align-items: flex-start; padding-bottom: 80px; }
+        .app-container { width: 100%; max-width: 480px; min-height: 100vh; background: radial-gradient(circle at top right, rgba(0, 109, 255, 0.15), transparent 50%); position: relative; overflow-x: hidden; padding: 20px; }
+        .glass-panel { background: var(--glass-bg); backdrop-filter: blur(var(--glass-blur)); -webkit-backdrop-filter: blur(var(--glass-blur)); border: 1px solid var(--glass-border); border-radius: 24px; box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2); }
+
+        /* HEADER */
+        header { text-align: center; padding: 35px 20px; margin-bottom: 25px; }
+        .profile-wrapper { position: relative; width: 130px; height: 130px; margin: 0 auto 25px; }
+        .profile-pic { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 3px solid rgba(255, 255, 255, 0.1); box-shadow: 0 15px 35px rgba(0, 109, 255, 0.2); }
+        .status-indicator { position: absolute; bottom: 8px; right: 8px; width: 22px; height: 22px; background: #10b981; border: 4px solid #0a192f; border-radius: 50%; }
+        h1 { font-size: 1.6rem; font-weight: 700; margin-bottom: 8px; letter-spacing: -0.5px; }
+        .job-title { color: var(--secondary-color); font-weight: 500; font-size: 0.9rem; line-height: 1.4; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px; padding: 0 10px; }
+        .bio { color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; max-width: 320px; margin: 0 auto 15px; }
+        
+        /* --- NUEVO: UBICACIÓN INTERACTIVA --- */
+        .location-info { 
+            display: flex; align-items: center; justify-content: center; gap: 8px; 
+            color: var(--text-muted); font-size: 0.85rem; margin-top: 15px; 
+            text-decoration: none; /* Quitamos el subrayado feo de link */
+            padding: 8px 15px; border-radius: 12px;
+            transition: all 0.2s ease;
+        }
+        /* Efecto al pasar el dedo/ratón: se ilumina */
+        .location-info:hover, .location-info:active {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+        .location-info i { color: var(--secondary-color); font-size: 1.1rem; }
+
+        /* GRID ACCIONES */
+        .actions-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 30px; }
+        .action-btn { display: flex; flex-direction: column; align-items: center; justify-content: center; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 18px; padding: 16px 10px; text-decoration: none; color: var(--text-main); transition: all 0.2s; }
+        .action-btn:active { transform: scale(0.96); background: rgba(255,255,255,0.08); }
+        .action-btn i { font-size: 1.6rem; margin-bottom: 10px; color: var(--secondary-color); }
+        .action-btn span { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.5px; }
+
+        /* SERVICIOS */
+        .services-section { margin-bottom: 35px; }
+        .section-title { font-size: 1.2rem; margin-bottom: 20px; padding-left: 15px; border-left: 4px solid var(--primary-color); font-weight: 700; }
+        .service-item { margin-bottom: 12px; overflow: hidden; }
+        .service-header { width: 100%; padding: 18px 20px; display: flex; justify-content: space-between; align-items: center; background: transparent; border: none; color: white; font-family: inherit; font-size: 1rem; font-weight: 500; text-align: left; cursor: pointer; }
+        .service-content { max-height: 0; overflow: hidden; padding: 0 20px; color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); border-top: 1px solid transparent; }
+        .service-item.active .service-content { max-height: 200px; padding-bottom: 20px; border-top-color: var(--glass-border); }
+        .service-item.active .ri-arrow-down-s-line { transform: rotate(180deg); color: var(--primary-color); }
+        .ri-arrow-down-s-line { transition: transform 0.3s ease, color 0.3s ease; font-size: 1.2rem; }
+
+        /* BOTÓN FLOTANTE */
+        .sticky-cta { position: fixed; bottom: 25px; left: 50%; transform: translateX(-50%); width: 88%; max-width: 420px; background: var(--primary-color); color: white; border: none; padding: 18px; border-radius: 50px; font-size: 1rem; font-weight: 700; letter-spacing: 0.5px; display: flex; align-items: center; justify-content: center; gap: 12px; box-shadow: 0 12px 35px rgba(0, 109, 255, 0.4); cursor: pointer; z-index: 100; transition: transform 0.2s; }
+        .sticky-cta:active { transform: translateX(-50%) scale(0.96); }
+        
+        /* FOOTER */
+        footer { text-align: center; color: var(--text-muted); font-size: 0.85rem; margin-top: 50px; padding-bottom: 20px; }
+        .social-links { display: flex; justify-content: center; gap: 25px; margin-bottom: 20px; }
+        .social-links a { color: var(--text-main); font-size: 1.6rem; text-decoration: none; opacity: 0.7; transition: all 0.2s; }
+        .social-links a:hover { opacity: 1; color: var(--secondary-color); transform: translateY(-3px); }
+        
+    </style>
+</head>
+<body>
+
+    <div class="app-container">
+        
+        <header class="glass-panel">
+            <div class="profile-wrapper">
+                <img src="foto-luis.jpg" alt="Luis Cánovas Castillo" class="profile-pic" 
+                     onerror="this.src='https://ui-avatars.com/api/?name=Luis+Canovas&background=006dff&color=fff&size=256';">
+                <div class="status-indicator"></div>
+            </div>
+            
+            <h1>Luis Cánovas Castillo</h1>
+            <p class="job-title">Institucional Territorial Director Sabadell Professional Aragón, Navarra y La Rioja</p>
+            <p class="bio">Conectando oportunidades y ofreciendo soluciones financieras a medida para colectivos profesionales e instituciones.</p>
+            
+            <a href="https://www.google.com/maps/search/?api=1&query=Calle+Isaac+Peral,+1,+Zaragoza" target="_blank" class="location-info">
+                <i class="ri-map-pin-2-line"></i>
+                <span>c/ Isaac Peral, 1, 2ª planta, Zaragoza</span>
+                <i class="ri-external-link-line" style="font-size: 0.8em; margin-left: 5px; opacity: 0.7;"></i>
+            </a>
+        </header>
+
+        <section class="actions-grid">
+            <a href="tel:+34661350069" class="action-btn">
+                <i class="ri-phone-fill"></i>
+                <span>Llamar</span>
+            </a>
+            <a href="mailto:canovasluis@bancsabadell.com" class="action-btn">
+                <i class="ri-mail-send-fill"></i>
+                <span>Email BS</span>
+            </a>
+            <a href="https://wa.me/34661350069" class="action-btn">
+                <i class="ri-whatsapp-line"></i>
+                <span>WhatsApp</span>
+            </a>
+        </section>
+
+        <section class="services-section">
+            <h2 class="section-title">Sabadell Professional</h2>
+
+            <div class="glass-panel service-item">
+                <button class="service-header">
+                    <span>Banca Institucional</span>
+                    <i class="ri-arrow-down-s-line"></i>
+                </button>
+                <div class="service-content">
+                    <p>Relación directa y gestión financiera especializada para colegios profesionales, asociaciones y grandes colectivos.</p>
+                </div>
+            </div>
+
+            <div class="glass-panel service-item">
+                <button class="service-header">
+                    <span>Financiación a Medida</span>
+                    <i class="ri-arrow-down-s-line"></i>
+                </button>
+                <div class="service-content">
+                    <p>Soluciones de crédito personalizadas, leasing y renting adaptadas a las necesidades específicas de su actividad.</p>
+                </div>
+            </div>
+
+            <div class="glass-panel service-item">
+                <button class="service-header">
+                    <span>Gestión Patrimonial</span>
+                    <i class="ri-arrow-down-s-line"></i>
+                </button>
+                <div class="service-content">
+                    <p>Asesoramiento experto en inversión y planificación fiscal para maximizar el valor de su patrimonio.</p>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <div class="social-links">
+                <a href="https://www.linkedin.com/in/luis-c%C3%A1novas-castillo-37769b108" target="_blank"><i class="ri-linkedin-box-fill"></i></a>
+                <a href="https://www.bancsabadell.com" target="_blank"><i class="ri-global-line"></i></a>
+                <a href="#" id="shareBtn"><i class="ri-share-forward-fill"></i></a>
+            </div>
+            <p>Bizsib © 2024. Tecnología NFC Corporativa.</p>
+        </footer>
+    </div>
+
+    <button class="sticky-cta" id="downloadVcard">
+        <i class="ri-contacts-book-2-fill"></i>
+        GUARDAR CONTACTO
+    </button>
+
+    <script>
+        // Acordeón
+        document.querySelectorAll('.service-header').forEach(button => {
+            button.addEventListener('click', () => {
+                const item = button.parentElement;
+                item.classList.toggle('active');
+            });
+        });
+
+        // Generador vCard
+        const contactData = {
+            name: "Luis",
+            surname: "Cánovas Castillo",
+            org: "Banc Sabadell",
+            title: "Institucional Territorial Director Sabadell Professional",
+            phone: "+34661350069",
+            email: "canovasluis@bancsabadell.com",
+            website: "www.bancsabadell.com",
+            address: "c/ Isaac Peral, 1, 2ª planta, 50001 Zaragoza, España"
+        };
+
+        document.getElementById('downloadVcard').addEventListener('click', () => {
+            const vCardContent = [
+                'BEGIN:VCARD',
+                'VERSION:3.0',
+                `N:${contactData.surname};${contactData.name};;;`,
+                `FN:${contactData.name} ${contactData.surname}`,
+                `ORG:${contactData.org}`,
+                `TITLE:${contactData.title}`,
+                `TEL;TYPE=WORK,VOICE:${contactData.phone}`,
+                `EMAIL;TYPE=WORK:${contactData.email}`,
+                `URL:${contactData.website}`,
+                `ADR;TYPE=WORK:;;${contactData.address}`,
+                'END:VCARD'
+            ].join('\n');
+
+            const blob = new Blob([vCardContent], { type: 'text/vcard;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `Contacto_${contactData.name}_${contactData.org}.vcf`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        });
+
+        // Compartir
+        const shareBtn = document.getElementById('shareBtn');
+        shareBtn.addEventListener('click', async (e) => {
+            e.preventDefault();
+            if (navigator.share) {
+                try {
+                    await navigator.share({
+                        title: 'Contacto Luis Cánovas - Sabadell',
+                        text: 'Te comparto mi tarjeta digital corporativa.',
+                        url: window.location.href
+                    });
+                } catch (err) {}
+            } else {
+                alert('Copia la URL para compartir.');
+            }
+        });
+    </script>
+</body>
+</html>
