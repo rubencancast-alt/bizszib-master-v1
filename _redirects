@@ -1,7 +1,6 @@
-# --- 1. REGLA PARA LUIS (La que ya funciona) ---
+# --- REGLA DE LUIS (Corregida a minúsculas) ---
 https://luis.bizszib.com/* /clients/luis/:splat 200!
 
-# --- 2. REGLA PARA LA PORTADA (La que falta) ---
+# --- REGLA DE LA AGENCIA ---
 https://bizszib.com/* /index.html 200
 /* /index.html 200
-
