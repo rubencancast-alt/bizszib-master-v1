@@ -1,3 +1,6 @@
-https://luis.bizszib.com/* /clients/luis/:splat 200
-https://bizszib.com/* /index.html 200
-/* /index.html 200
+# Regla para Luis (Con mayusculas porque la carpeta es LUIS)
+https://luis.bizszib.com/* /clients/LUIS/:splat  200
+
+# Regla Principal
+https://bizszib.com/* /index.html  200
+/* /index.html  200
