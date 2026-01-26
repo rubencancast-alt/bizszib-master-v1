@@ -15,81 +15,52 @@
 
         body {
             margin: 0;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background-color: var(--bg);
             color: var(--text);
             height: 100vh;
-            overflow: hidden;
+            overflow: hidden; /* Evita scroll para efecto app */
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            position: relative;
+            perspective: 1000px; /* Necesario para el 3D */
         }
 
-        /* --- FONDO ANIMADO (AURORA) --- */
+        /* --- FONDO AURORA ANIMADO --- */
         .ambient-light {
             position: absolute;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
+            width: 100%; height: 100%;
             z-index: -1;
-            top: 0;
-            left: 0;
+            overflow: hidden;
         }
 
         .orb {
             position: absolute;
             border-radius: 50%;
             filter: blur(80px);
-            opacity: 0.6;
-            animation: floatOrb 10s infinite ease-in-out;
+            opacity: 0.5;
+            animation: moveOrb 15s infinite alternate ease-in-out;
+        }
+        .orb-1 { width: 400px; height: 400px; background: var(--accent-2); top: -10%; left: -10%; }
+        .orb-2 { width: 500px; height: 500px; background: #7000ff; bottom: -10%; right: -10%; animation-delay: -5s; }
+        .orb-3 { width: 300px; height: 300px; background: var(--accent); top: 40%; left: 40%; opacity: 0.3; animation-duration: 25s; }
+
+        @keyframes moveOrb {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(50px, 30px) scale(1.1); }
         }
 
-        .orb-1 {
-            width: 400px;
-            height: 400px;
-            background: var(--accent-2);
-            top: -100px;
-            left: -100px;
-            animation-delay: 0s;
-        }
-
-        .orb-2 {
-            width: 500px;
-            height: 500px;
-            background: #7000ff; /* Violeta */
-            bottom: -150px;
-            right: -100px;
-            animation-delay: -2s;
-        }
-
-        .orb-3 {
-            width: 300px;
-            height: 300px;
-            background: var(--accent);
-            top: 40%;
-            left: 60%;
-            opacity: 0.4;
-            animation-delay: -5s;
-        }
-
-        @keyframes floatOrb {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            50% { transform: translate(30px, -50px) scale(1.1); }
-        }
-
-        /* --- RED/MALLA DE FONDO (TECH FEEL) --- */
+        /* Malla Tech */
         .grid-overlay {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
             background-image: 
                 linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-            background-size: 50px 50px;
-            z-index: -1;
-            mask-image: radial-gradient(circle, black 40%, transparent 100%);
-            -webkit-mask-image: radial-gradient(circle, black 40%, transparent 100%);
+            background-size: 60px 60px;
+            mask-image: radial-gradient(circle, black 30%, transparent 80%);
+            -webkit-mask-image: radial-gradient(circle, black 30%, transparent 80%);
         }
 
         /* --- CONTENEDOR PRINCIPAL --- */
@@ -98,148 +69,153 @@
             z-index: 10;
             padding: 20px;
             max-width: 900px;
+            transform-style: preserve-3d; /* Clave para el efecto 3D */
         }
 
-        /* --- LOGO "JOYA" --- */
-        .logo-box {
-            display: inline-block;
+        /* --- LOGO 3D INTERACTIVO --- */
+        .logo-wrapper {
             position: relative;
-            margin-bottom: 40px;
-            animation: fadeInDown 1.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+            display: inline-block;
+            margin-bottom: 30px;
+            transition: transform 0.1s ease-out; /* Movimiento suave */
         }
 
         .main-logo {
-            width: 120px;
-            height: 120px;
-            border-radius: 30px; /* Estilo iOS */
-            /* Sombra interna para dar volumen */
-            box-shadow: 
-                inset 0 0 20px rgba(0,0,0,0.1), 
-                0 20px 60px rgba(0, 0, 0, 0.5),
-                0 0 0 1px rgba(255,255,255,0.1); 
+            width: 130px; height: 130px;
+            border-radius: 35px;
             background: white;
             padding: 10px;
             object-fit: contain;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.1);
             position: relative;
             z-index: 2;
         }
 
-        /* Resplandor detrás del logo */
         .logo-glow {
             position: absolute;
             top: 50%; left: 50%;
             transform: translate(-50%, -50%);
-            width: 140px; height: 140px;
+            width: 160px; height: 160px;
             background: linear-gradient(135deg, var(--accent), var(--accent-2));
-            filter: blur(30px);
+            filter: blur(40px);
             border-radius: 50%;
             z-index: 1;
-            opacity: 0.6;
-            animation: pulseGlow 4s infinite alternate;
+            animation: pulse 3s infinite;
         }
 
-        @keyframes pulseGlow {
-            0% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
-            100% { opacity: 0.8; transform: translate(-50%, -50%) scale(1.2); }
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
+            50% { opacity: 0.8; transform: translate(-50%, -50%) scale(1.1); }
         }
 
-        /* --- TIPOGRAFÍA DE IMPACTO --- */
+        /* --- TÍTULO CON EFECTO GLITCH (Cyberpunk) --- */
+        .glitch-wrapper {
+            position: relative;
+            margin-bottom: 10px;
+        }
+
         h1 {
             font-size: 5rem;
             line-height: 0.9;
-            font-weight: 800;
-            letter-spacing: -3px; /* El secreto del diseño moderno */
+            font-weight: 900;
+            letter-spacing: -3px;
             margin: 0;
-            background: linear-gradient(180deg, #ffffff 0%, #a5a5a5 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: fadeInUp 1s 0.3s backwards;
+            color: white;
+            position: relative;
+        }
+
+        /* El efecto de duplicado para el glitch */
+        h1::before, h1::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--bg);
+        }
+
+        h1::before {
+            left: 2px;
+            text-shadow: -1px 0 #ff00c1;
+            clip: rect(44px, 450px, 56px, 0);
+            animation: glitch-anim 5s infinite linear alternate-reverse;
+        }
+
+        h1::after {
+            left: -2px;
+            text-shadow: -1px 0 #00fff9;
+            clip: rect(44px, 450px, 56px, 0);
+            animation: glitch-anim2 5s infinite linear alternate-reverse;
+        }
+
+        @keyframes glitch-anim {
+            0% { clip: rect(30px, 9999px, 10px, 0); }
+            5% { clip: rect(80px, 9999px, 90px, 0); }
+            10% { clip: rect(10px, 9999px, 30px, 0); }
+            15% { clip: rect(100px, 9999px, 20px, 0); }
+            100% { clip: rect(0, 0, 0, 0); } /* Pausa larga */
+        }
+        @keyframes glitch-anim2 {
+            0% { clip: rect(10px, 9999px, 80px, 0); }
+            5% { clip: rect(90px, 9999px, 10px, 0); }
+            10% { clip: rect(30px, 9999px, 50px, 0); }
+            100% { clip: rect(0, 0, 0, 0); }
         }
 
         .tagline {
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             color: var(--accent);
             text-transform: uppercase;
             letter-spacing: 6px;
             margin-top: 20px;
             font-weight: 600;
-            opacity: 0.9;
-            animation: fadeInUp 1s 0.5s backwards;
-            text-shadow: 0 0 20px rgba(0, 242, 255, 0.4);
         }
 
         p {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             color: #8f9bb3;
             max-width: 500px;
             margin: 30px auto;
             line-height: 1.6;
-            animation: fadeInUp 1s 0.7s backwards;
         }
 
-        /* --- BOTONES PREMIUM --- */
-        .btn-group {
-            margin-top: 40px;
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            animation: fadeInUp 1s 0.9s backwards;
-        }
-
+        /* --- BOTÓN ANIMADO --- */
         .btn {
-            text-decoration: none;
-            padding: 18px 40px;
-            border-radius: 100px;
-            font-weight: bold;
-            font-size: 0.9rem;
-            letter-spacing: 1px;
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-            text-transform: uppercase;
-        }
-
-        /* Botón Principal (Glass + Glow) */
-        .btn-primary {
+            display: inline-block;
+            padding: 18px 45px;
+            border-radius: 50px;
             background: rgba(255, 255, 255, 0.1);
             color: white;
+            text-decoration: none;
+            font-weight: bold;
             border: 1px solid rgba(255, 255, 255, 0.2);
             backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.8rem;
         }
 
-        .btn-primary:hover {
-            background: white;
-            color: black;
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.2);
+        /* Efecto de brillo al pasar el ratón */
+        .btn::after {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: 0.5s;
         }
 
-        /* Botón Secundario (Outline) */
-        .btn-secondary {
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: #8f9bb3;
+        .btn:hover::after { left: 100%; }
+        .btn:hover {
+            background: white; color: black;
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.4);
+            transform: translateY(-3px);
         }
 
-        .btn-secondary:hover {
-            border-color: white;
-            color: white;
-        }
-
-        /* --- ANIMACIONES GLOBALES --- */
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(40px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-40px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* MÓVIL */
         @media (max-width: 600px) {
-            h1 { font-size: 3rem; letter-spacing: -1px; }
-            .tagline { font-size: 1rem; letter-spacing: 3px; }
-            .btn-group { flex-direction: column; gap: 15px; }
+            h1 { font-size: 3rem; }
+            .tagline { font-size: 0.9rem; letter-spacing: 3px; }
             .main-logo { width: 100px; height: 100px; }
         }
     </style>
@@ -253,26 +229,45 @@
         <div class="grid-overlay"></div>
     </div>
 
-    <div class="hero-container">
+    <div class="hero-container" id="hero">
         
-        <div class="logo-box">
+        <div class="logo-wrapper" id="logo3d">
             <div class="logo-glow"></div>
             <img src="IMG_9153.jpeg" alt="BIZSZIB Logo" class="main-logo">
         </div>
 
         <div class="tagline">The Future is Now</div>
-        <h1>DIGITAL<br>EVOLUTION.</h1>
+        
+        <div class="glitch-wrapper">
+            <h1 data-text="DIGITAL EVOLUTION.">DIGITAL<br>EVOLUTION.</h1>
+        </div>
 
         <p>
-            Redefine tu presencia profesional. <br>
+            Redefine tu presencia profesional.<br>
             Tecnología NFC de vanguardia para líderes globales.
         </p>
 
-        <div class="btn-group">
-            <a href="mailto:hola@bizszib.com" class="btn btn-primary">Empezar Proyecto</a>
-            <a href="#" class="btn btn-secondary">Ver Demo</a>
-        </div>
+        <a href="mailto:hola@bizszib.com" class="btn">Empezar Proyecto</a>
     </div>
+
+    <script>
+        const hero = document.getElementById('hero');
+        const logo = document.getElementById('logo3d');
+
+        document.addEventListener('mousemove', (e) => {
+            // Calcula la posición del ratón
+            let xAxis = (window.innerWidth / 2 - e.pageX) / 25;
+            let yAxis = (window.innerHeight / 2 - e.pageY) / 25;
+            
+            // Aplica la rotación al logo
+            logo.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+        });
+
+        // Restaurar posición al salir
+        document.addEventListener('mouseleave', () => {
+             logo.style.transform = `rotateY(0deg) rotateX(0deg)`;
+        });
+    </script>
 
 </body>
 </html>
