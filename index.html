@@ -7,7 +7,7 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;600;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;800&display=swap" rel="stylesheet">
 
     <style>
         /* --- CORE SETTINGS --- */
@@ -32,7 +32,7 @@
             justify-content: center;
         }
 
-        /* --- CANVAS DE FONDO (LA MAGIA) --- */
+        /* --- CANVAS DE FONDO --- */
         #neural-canvas {
             position: absolute;
             top: 0; left: 0;
@@ -40,7 +40,7 @@
             z-index: 0;
         }
 
-        /* --- CAPA DE RUIDO (TEXTURA CINEMÁTICA) --- */
+        /* --- RUIDO VISUAL --- */
         .noise-overlay {
             position: absolute;
             top: 0; left: 0;
@@ -64,122 +64,124 @@
             border-top: 1px solid rgba(255,255,255,0.2);
             box-shadow: 0 40px 80px rgba(0,0,0,0.6);
             text-align: center;
-            max-width: 600px;
+            max-width: 650px;
             transform-style: preserve-3d;
             animation: floatHero 6s ease-in-out infinite;
         }
 
-        /* --- LOGO FLOTANTE --- */
-        .logo-container {
+        /* --- NUEVO LOGO HECHO CON CÓDIGO (NO IMAGEN) --- */
+        .brand-logo {
+            font-size: 3.5rem;
+            font-weight: 800;
+            letter-spacing: -2px;
+            margin-bottom: 20px;
+            display: inline-block;
             position: relative;
-            width: 140px; height: 140px;
-            margin: 0 auto 30px auto;
+            background: linear-gradient(135deg, #ffffff 0%, #a0a0a0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 20px rgba(255,255,255,0.3));
         }
 
-        .main-logo {
-            width: 100%; height: 100%;
-            object-fit: contain;
-            background: white;
-            border-radius: 35px;
-            padding: 15px;
-            box-shadow: 0 0 50px rgba(255, 255, 255, 0.1);
-            position: relative;
-            z-index: 2;
+        /* El punto de energía */
+        .brand-dot {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            background-color: var(--neon-blue);
+            border-radius: 50%;
+            margin-left: 5px;
+            box-shadow: 0 0 15px var(--neon-blue);
+            animation: pulseDot 2s infinite;
         }
 
-        /* Anillo de energía detrás del logo */
-        .energy-ring {
-            position: absolute;
-            top: -10px; left: -10px; right: -10px; bottom: -10px;
-            border-radius: 45px;
-            background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple), var(--neon-blue));
-            background-size: 400%;
-            z-index: 1;
-            filter: blur(20px);
-            opacity: 0.7;
-            animation: glowing 20s linear infinite;
+        /* Detalle visual sutil debajo del logo */
+        .brand-line {
+            width: 40px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--neon-purple), transparent);
+            margin: 0 auto 40px auto;
+            border-radius: 2px;
         }
 
-        /* --- TIPOGRAFÍA DE ALTO IMPACTO --- */
+        /* --- TIPOGRAFÍA --- */
         .pre-title {
             color: var(--neon-blue);
             letter-spacing: 6px;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             text-transform: uppercase;
             font-weight: 600;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
         }
 
         h1 {
-            font-size: 4.5rem;
-            line-height: 0.9;
-            margin-bottom: 20px;
-            font-weight: 900;
+            font-size: 4rem;
+            line-height: 0.95;
+            margin-bottom: 25px;
+            font-weight: 800;
             text-transform: uppercase;
-            
-            /* Efecto texto hueco */
-            color: transparent;
-            -webkit-text-stroke: 2px rgba(255,255,255,0.8);
+            color: white;
             position: relative;
-            transition: 0.5s;
-            cursor: default;
         }
 
-        h1:hover {
-            color: white;
-            text-shadow: 0 0 30px rgba(255,255,255,0.5);
-            -webkit-text-stroke: 0px transparent;
+        /* Gradiente en el texto principal */
+        .highlight-text {
+            background: linear-gradient(90deg, var(--neon-blue), #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         p {
             color: #a0a0a0;
             font-size: 1.1rem;
             line-height: 1.6;
-            margin-bottom: 40px;
+            margin-bottom: 45px;
+            font-weight: 300;
         }
 
         /* --- BOTÓN CIBERNÉTICO --- */
         .cyber-btn {
             position: relative;
             display: inline-block;
-            padding: 18px 50px;
-            color: var(--neon-blue);
+            padding: 16px 45px;
+            color: white;
             text-decoration: none;
             text-transform: uppercase;
             letter-spacing: 3px;
-            font-size: 0.9rem;
-            font-weight: 900;
+            font-size: 0.85rem;
+            font-weight: 800;
             overflow: hidden;
-            transition: 0.5s;
-            background: rgba(0, 243, 255, 0.05);
-            border: 1px solid var(--neon-blue);
+            transition: 0.4s;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 100px;
+            backdrop-filter: blur(10px);
         }
 
         .cyber-btn:hover {
             background: var(--neon-blue);
             color: black;
-            box-shadow: 0 0 50px var(--neon-blue);
-            border-radius: 5px; /* Pequeña transformación */
+            box-shadow: 0 0 40px rgba(0, 243, 255, 0.6);
+            border-color: var(--neon-blue);
+            transform: translateY(-2px);
         }
 
         /* --- ANIMACIONES --- */
-        @keyframes glowing {
-            0% { background-position: 0 0; }
-            50% { background-position: 400% 0; }
-            100% { background-position: 0 0; }
+        @keyframes pulseDot {
+            0% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1); }
         }
 
         @keyframes floatHero {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
+            0%, 100% { transform: translateY(0) rotateX(0); }
+            50% { transform: translateY(-15px) rotateX(2deg); }
         }
 
-        /* Ajustes móvil */
         @media (max-width: 600px) {
-            h1 { font-size: 3rem; -webkit-text-stroke: 1px rgba(255,255,255,0.8); }
-            .glass-panel { padding: 30px 20px; margin: 20px; }
-            .main-logo { width: 100px; height: 100px; }
-            .logo-container { width: 100px; height: 100px; }
+            h1 { font-size: 2.8rem; }
+            .brand-logo { font-size: 2.5rem; }
+            .glass-panel { padding: 40px 20px; width: 90%; }
         }
     </style>
 </head>
@@ -190,30 +192,31 @@
     <div class="noise-overlay"></div>
 
     <div class="glass-panel" id="tilt-card">
-        <div class="logo-container">
-            <div class="energy-ring"></div>
-            <img src="IMG_9153.jpeg" alt="BIZSZIB" class="main-logo">
+        
+        <div class="brand-logo">
+            BizsziB<span class="brand-dot"></span>
         </div>
+        <div class="brand-line"></div>
 
-        <div class="pre-title">Next Gen Identity</div>
-        <h1>FUTURE<br>IS HERE</h1>
+        <div class="pre-title">System Ready</div>
+        <h1>
+            YOUR BRAND.<br>
+            <span class="highlight-text">UNLIMITED.</span>
+        </h1>
+        
         <p>
-            No somos una tarjeta de visita.<br>
-            Somos tu sistema operativo de networking.<br>
-            Conecta. Impacta. Evoluciona.
+            Olvida el papel. El futuro es digital, rastreable y eterno.
+            Infraestructura de identidad para la era moderna.
         </p>
 
-        <a href="mailto:hola@bizszib.com" class="cyber-btn">INICIAR</a>
+        <a href="mailto:hola@bizszib.com" class="cyber-btn">Crear Identidad</a>
     </div>
 
     <script>
-        // --- 1. CONFIGURACIÓN DEL CANVAS (RED NEURONAL) ---
         const canvas = document.getElementById('neural-canvas');
         const ctx = canvas.getContext('2d');
-        let width, height;
-        let particles = [];
+        let width, height, particles = [];
 
-        // Ajustar tamaño al de la pantalla
         function resize() {
             width = canvas.width = window.innerWidth;
             height = canvas.height = window.innerHeight;
@@ -221,78 +224,53 @@
         window.addEventListener('resize', resize);
         resize();
 
-        // Objeto Ratón
         const mouse = { x: undefined, y: undefined };
         window.addEventListener('mousemove', (e) => {
             mouse.x = e.x;
             mouse.y = e.y;
         });
 
-        // Clase Partícula
         class Particle {
             constructor() {
                 this.x = Math.random() * width;
                 this.y = Math.random() * height;
-                this.vx = (Math.random() - 0.5) * 0.5; // Velocidad X
-                this.vy = (Math.random() - 0.5) * 0.5; // Velocidad Y
-                this.size = Math.random() * 2;
+                this.vx = (Math.random() - 0.5) * 0.3;
+                this.vy = (Math.random() - 0.5) * 0.3;
+                this.size = Math.random() * 1.5;
             }
-
             update() {
                 this.x += this.vx;
                 this.y += this.vy;
-
-                // Rebotar en los bordes
                 if (this.x < 0 || this.x > width) this.vx *= -1;
                 if (this.y < 0 || this.y > height) this.vy *= -1;
-
-                // Interacción con ratón (repulsión suave)
-                let dx = mouse.x - this.x;
-                let dy = mouse.y - this.y;
-                let distance = Math.sqrt(dx*dx + dy*dy);
-                if (distance < 150) {
-                    const angle = Math.atan2(dy, dx);
-                    this.x -= Math.cos(angle) * 1;
-                    this.y -= Math.sin(angle) * 1;
-                }
             }
-
             draw() {
-                ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
                 ctx.fill();
             }
         }
 
-        // Crear enjambre inicial
         function initParticles() {
             particles = [];
-            // Número de partículas según tamaño de pantalla
-            const particleCount = (width * height) / 9000; 
-            for (let i = 0; i < particleCount; i++) {
-                particles.push(new Particle());
-            }
+            const count = (width * height) / 10000; 
+            for (let i = 0; i < count; i++) particles.push(new Particle());
         }
 
-        // Bucle de animación (60 FPS)
         function animate() {
             ctx.clearRect(0, 0, width, height);
-            
             for (let i = 0; i < particles.length; i++) {
                 particles[i].update();
                 particles[i].draw();
-
-                // Conectar partículas cercanas con líneas
                 for (let j = i; j < particles.length; j++) {
                     const dx = particles[i].x - particles[j].x;
                     const dy = particles[i].y - particles[j].y;
-                    const distance = Math.sqrt(dx * dx + dy * dy);
-
-                    if (distance < 120) {
+                    const d = Math.sqrt(dx*dx + dy*dy);
+                    if (d < 100) {
                         ctx.beginPath();
-                        ctx.strokeStyle = `rgba(0, 243, 255, ${1 - distance/120})`; // Color Cian dinámico
-                        ctx.lineWidth = 0.5;
+                        ctx.strokeStyle = `rgba(0, 243, 255, ${1 - d/100})`;
+                        ctx.lineWidth = 0.3;
                         ctx.moveTo(particles[i].x, particles[i].y);
                         ctx.lineTo(particles[j].x, particles[j].y);
                         ctx.stroke();
@@ -301,28 +279,16 @@
             }
             requestAnimationFrame(animate);
         }
-
         initParticles();
         animate();
 
-        // --- 2. EFECTO TILT 3D (TARJETA) ---
+        // TILT EFFECT
         const card = document.getElementById('tilt-card');
-        
         document.addEventListener('mousemove', (e) => {
-            const xAxis = (window.innerWidth / 2 - e.pageX) / 30;
-            const yAxis = (window.innerHeight / 2 - e.pageY) / 30;
+            const xAxis = (window.innerWidth / 2 - e.pageX) / 40;
+            const yAxis = (window.innerHeight / 2 - e.pageY) / 40;
             card.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
         });
-
-        // Restaurar al salir
-        document.addEventListener('mouseleave', () => {
-             card.style.transform = `rotateY(0deg) rotateX(0deg)`;
-             card.style.transition = 'all 0.5s ease';
-        });
-        document.addEventListener('mouseenter', () => {
-             card.style.transition = 'none';
-        });
-
     </script>
 </body>
 </html>
