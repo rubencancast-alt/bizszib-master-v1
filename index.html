@@ -3,21 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BIZSZIB | Identidad Digital</title>
+    <title>BIZSZIB | Agencia Digital</title>
     <style>
-        /* --- ESTILOS MODERNOS (CYBER-TECH) --- */
+        /* --- ESTILOS PREMIUM --- */
         :root {
-            --primary: #64ffda; /* Verde Neón */
-            --bg-dark: #0a192f; /* Azul Navy Profundo */
-            --text-light: #ccd6f6;
+            --primary: #64ffda;
+            --bg-dark: #0a192f;
+            --text-light: #e6f1ff;
         }
 
         body {
             margin: 0;
-            font-family: 'Segoe UI', system-ui, sans-serif;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
             background-color: var(--bg-dark);
-            /* Degradado de fondo */
-            background-image: radial-gradient(circle at 50% 50%, #112240 0%, #0a192f 100%);
+            /* Fondo sutil y elegante */
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(100, 255, 218, 0.1) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(10, 25, 47, 1) 0px, transparent 50%);
             color: var(--text-light);
             min-height: 100vh;
             display: flex;
@@ -25,153 +27,155 @@
             align-items: center;
             justify-content: center;
             overflow-x: hidden;
+            text-align: center;
         }
 
         .container {
-            text-align: center;
             padding: 20px;
             max-width: 800px;
-            z-index: 10;
+            animation: fadeIn 1.5s ease;
         }
 
-        /* --- TU LOGO --- */
+        /* --- LOGO TIPO APP (LA SOLUCIÓN AL FONDO BLANCO) --- */
+        .logo-wrapper {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 30px;
+        }
+
         .main-logo {
-            width: 200px; /* Tamaño del logo */
-            height: auto;
-            margin-bottom: 25px;
-            border-radius: 20px; /* Bordes redondeados */
-            box-shadow: 0 10px 40px rgba(0,0,0,0.6); /* Sombra elegante */
-            border: 2px solid rgba(255,255,255,0.1); /* Borde sutil */
+            width: 140px; /* Tamaño más discreto y elegante */
+            height: 140px;
+            object-fit: contain; /* Asegura que se vea entero */
+            background-color: white; /* Aseguramos el blanco */
+            border-radius: 35px; /* Bordes estilo App de iOS */
+            padding: 10px; /* Un poco de aire alrededor del logo */
+            
+            /* LA CLAVE: Sombra blanca para integrarlo en lo oscuro */
+            box-shadow: 
+                0 20px 50px rgba(0,0,0,0.5), /* Sombra oscura abajo */
+                0 0 30px rgba(255, 255, 255, 0.15); /* Resplandor blanco alrededor */
+            
+            transition: transform 0.3s ease;
+        }
+
+        .main-logo:hover {
+            transform: scale(1.05); /* Efecto zoom sutil */
         }
 
         /* --- TIPOGRAFÍA --- */
         h1 {
-            font-size: 3.5rem;
-            margin: 0;
-            background: linear-gradient(to right, #ffffff, #8892b0);
+            font-size: 3rem;
+            line-height: 1.1;
+            margin: 0 0 15px 0;
+            font-weight: 800;
+            letter-spacing: -1px;
+            background: linear-gradient(90deg, #fff, #8892b0);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            font-weight: 800;
-            letter-spacing: -2px;
         }
 
         .subtitle {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             color: var(--primary);
-            margin-top: 10px;
             text-transform: uppercase;
             letter-spacing: 4px;
             font-weight: 600;
+            margin-bottom: 40px;
         }
 
         p {
-            font-size: 1.1rem;
-            line-height: 1.6;
-            margin-top: 20px;
+            font-size: 1.2rem;
             color: #8892b0;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
+            max-width: 500px;
+            margin: 0 auto 40px auto;
+            line-height: 1.6;
         }
 
-        /* --- TARJETA FLOTANTE (ANIMACIÓN) --- */
-        .floating-card {
-            width: 260px;
-            height: 160px;
-            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0));
+        /* --- TARJETA FLOTANTE DECORATIVA --- */
+        .visual-card {
+            width: 220px;
+            height: 140px;
+            background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border-radius: 18px;
-            border: 1px solid rgba(255, 255, 255, 0.18);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-            margin: 40px auto;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            margin: 0 auto 40px auto;
             display: flex;
             align-items: center;
             justify-content: center;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
             animation: float 6s ease-in-out infinite;
-            position: relative;
         }
 
-        /* Chip dorado */
-        .chip {
-            width: 35px;
-            height: 25px;
-            background: linear-gradient(135deg, #ffd700, #ffcc00);
-            border-radius: 4px;
-            position: absolute;
-            left: 25px;
-            top: 45px;
-            opacity: 0.9;
-        }
-
-        .card-text {
-            position: absolute;
-            bottom: 15px;
-            left: 25px;
+        .visual-card span {
             font-family: monospace;
-            color: rgba(255,255,255,0.7);
-            font-size: 12px;
-            letter-spacing: 1px;
+            font-size: 0.9rem;
+            color: var(--primary);
+            opacity: 0.8;
         }
 
         @keyframes float {
-            0% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-15px) rotate(2deg); }
-            100% { transform: translateY(0px) rotate(0deg); }
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
         }
 
-        /* --- BOTÓN --- */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- BOTÓN CTA --- */
         .btn {
             display: inline-block;
-            margin-top: 30px;
-            padding: 15px 40px;
-            border: 1px solid var(--primary);
+            padding: 16px 40px;
+            background-color: transparent;
+            border: 2px solid var(--primary);
             color: var(--primary);
-            text-decoration: none;
             font-weight: bold;
-            border-radius: 5px;
+            text-decoration: none;
+            border-radius: 50px;
             transition: all 0.3s ease;
-            cursor: pointer;
-            background: transparent;
-            text-transform: uppercase;
+            font-size: 0.9rem;
             letter-spacing: 1px;
+            text-transform: uppercase;
         }
 
         .btn:hover {
-            background: rgba(100, 255, 218, 0.1);
+            background-color: rgba(100, 255, 218, 0.1);
             box-shadow: 0 0 20px rgba(100, 255, 218, 0.4);
-            transform: translateY(-3px);
+            transform: translateY(-2px);
         }
 
-        /* Ajustes Móvil */
+        /* MÓVIL */
         @media (max-width: 600px) {
-            h1 { font-size: 2.5rem; }
-            .main-logo { width: 160px; }
-            .subtitle { font-size: 0.9rem; letter-spacing: 2px; }
-            .floating-card { width: 220px; height: 140px; }
+            h1 { font-size: 2.2rem; }
+            .main-logo { width: 110px; height: 110px; }
+            .visual-card { display: none; /* Ocultamos la tarjeta extra en móvil para limpiar */ }
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <img src="IMG_9153.jpeg" alt="Logo BIZSZIB" class="main-logo">
         
-        <h1>BIZSZIB</h1>
+        <div class="logo-wrapper">
+            <img src="IMG_9153.jpeg" alt="Logo Bizszib" class="main-logo">
+        </div>
+
         <div class="subtitle">Digital Identity Systems</div>
-        
-        <div class="floating-card">
-            <div class="chip"></div>
-            <div class="card-text">BIZSZIB /// MEMBER</div>
-            <div style="font-size: 2rem; opacity: 0.8;">⚡</div>
+        <h1>ELEVATE YOUR<br>BRAND.</h1>
+
+        <div class="visual-card">
+            <span>/// NFC READY</span>
         </div>
 
         <p>
-            Transformamos profesionales en marcas digitales. <br>
-            Tecnología NFC, diseño premium y alcance global.
+            Conectamos el mundo físico con el digital. 
+            Tarjetas inteligentes para profesionales del futuro.
         </p>
 
-        <a href="mailto:hola@bizszib.com" class="btn">Contactar Agencia</a>
+        <a href="mailto:hola@bizszib.com" class="btn">Empezar Ahora</a>
     </div>
 
 </body>
