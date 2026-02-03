@@ -1,9 +1,10 @@
 # --- REGLA DE LUIS ---
 https://luis.bizszib.com/* /clients/luis/:splat 200!
 
-# --- REGLA DE MANOLO (NUEVA) ---
-https://manolo.bizszib.com/* /clients/manolo/:splat 200!
+# --- REGLA DE INOVA (ANTES MANOLO) ---
+https://inovaingenieros.bizszib.com/* /clients/manolo/:splat  200!
 
 # --- REGLA DE LA AGENCIA ---
 https://bizszib.com/* /index.html 200
 /* /index.html 200
+
